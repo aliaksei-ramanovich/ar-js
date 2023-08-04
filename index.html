@@ -62,7 +62,7 @@
         el.addEventListener("gps-camera-update-position", e => {
 
 
-            // alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+            alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
 
             longitudeSpan.innerHTML = e.detail.position.longitude;
             latitudeSpan.innerHTML = e.detail.position.latitude;
