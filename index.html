@@ -35,3 +35,44 @@
         </a-scene>
     </body>
 </html>
+
+
+
+<script>
+    console.log('----------kek1')
+
+    window.onload = () => {
+        let testEntityAdded = false;
+
+        const el = document.querySelector("[gps-camera]");
+
+
+        console.log('el', el)
+
+        // el.addEventListener("gps-camera-update-position", e => {
+        //
+        //     console.log('kek', text1)
+        //     console.log('kek', text2)
+        //     if(true) {
+        //         alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+        //         // Add a box to the north of the initial GPS position
+        //         const entity = document.createElement("a-box");
+        //         text.innerText = e
+        //         entity.setAttribute("scale", {
+        //             x: 20,
+        //             y: 20,
+        //             z: 20
+        //         });
+        //         entity.setAttribute('material', { color: 'red' } );
+        //         entity.setAttribute('gps-new-entity-place', {
+        //             latitude: e.detail.position.latitude + 0.001,
+        //             longitude: e.detail.position.longitude
+        //         });
+        //         text1.innerText = e.detail.position.latitude + 0.001;
+        //         text2.innerText = e.detail.position.longitude;
+        //         document.querySelector("a-scene").appendChild(entity);
+        //     }
+        //     testEntityAdded = true;
+        // });
+    };
+</script>
