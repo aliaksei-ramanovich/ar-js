@@ -89,8 +89,8 @@
             {
                 name: 'Magnemite',
                 location: {
-                    lat: 44.496470,
-                    lng: 11.320180,
+                    lat: 53.95514716666826,
+                    lng: 27.664972236379985,
                 }
             },
         ];
@@ -124,6 +124,8 @@
 
     function renderPlaces(places) {
         let scene = document.querySelector('a-scene');
+
+        console.log('renderPlaces')
 
         places.forEach((place) => {
             let latitude = place.location.lat;
