@@ -21,39 +21,38 @@
             </p>
         </div>
 
-<!--        <a-scene-->
-<!--                renderer="logarithmicDepthBuffer: true;"-->
-<!--                embedded-->
-<!--                loading-screen="enabled: false;"-->
-<!--                arjs="sourceType: webcam; debugUIEnabled: false;"-->
-<!--        >-->
-<!--            <a-assets>-->
-<!--                <a-asset-item-->
-<!--                        id="animated-asset"-->
-<!--                        src="assets/asset.gltf"-->
-<!--                ></a-asset-item>-->
-<!--            </a-assets>-->
-
-<!--            <a-entity-->
-<!--                    look-at="[gps-camera]"-->
-<!--                    animation-mixer="loop: repeat"-->
-<!--                    gltf-model="#animated-asset"-->
-<!--                    scale="0.14768864307354904 0.14768864307354904 0.14768864307354904"-->
-<!--                    gps-entity-place="latitude: 53.95514716666826; longitude: 27.664972236379985;"-->
-<!--            ></a-entity>-->
-
-<!--            <a-camera gps-camera rotation-reader></a-camera>-->
-
-<!--        </a-scene>-->
-
         <a-scene
-                vr-mode-ui="enabled: false"
+                renderer="logarithmicDepthBuffer: true;"
                 embedded
-                arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
-            <a-camera gps-new-camera='gpsMinDistance: 5' rotation-reader>
+                loading-screen="enabled: false;"
+                arjs="sourceType: webcam; debugUIEnabled: false;"
+        >
+            <a-assets>
+                <a-asset-item
+                        id="animated-asset"
+                        src="assets/asset.gltf"
+                ></a-asset-item>
+            </a-assets>
 
-            </a-camera>
+            <a-entity
+                    look-at="[gps-camera]"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#animated-asset"
+                    scale="0.14768864307354904 0.14768864307354904 0.14768864307354904"
+                    gps-entity-place="latitude: 53.9552398; longitude: 27.665165;"
+            ></a-entity>
+
+            <a-camera gps-camera rotation-reader></a-camera>
         </a-scene>
+
+<!--        <a-scene-->
+<!--                vr-mode-ui="enabled: false"-->
+<!--                embedded-->
+<!--                arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>-->
+<!--            <a-camera gps-new-camera='gpsMinDistance: 5' rotation-reader>-->
+
+<!--            </a-camera>-->
+<!--        </a-scene>-->
     </body>
 </html>
 
@@ -79,10 +78,10 @@
     //     });
     // };
 
-    window.onload = () => {
-        let places = staticLoadPlaces();
-        renderPlaces(places);
-    };
+    // window.onload = () => {
+    //     let places = staticLoadPlaces();
+    //     renderPlaces(places);
+    // };
 
     function staticLoadPlaces() {
         return [
@@ -96,37 +95,37 @@
         ];
     }
 
-
-    let testEntityAdded = false;
-
-    const el = document.querySelector("[gps-new-camera]");
-
-    const longitudeSpan = document.querySelector(".longitude");
-    const latitudeSpan = document.querySelector(".latitude");
-
-    el.addEventListener("gps-camera-update-position", e => {
-        if(!testEntityAdded) {
-            alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
-            // Add a box to the north of the initial GPS position
-
-            const entity = document.createElement("a-box");
-            entity.setAttribute("scale", {
-                x: 20,
-                y: 20,
-                z: 20
-            });
-            entity.setAttribute('material', { color: 'red' } );
-            entity.setAttribute('gps-new-entity-place', {
-                latitude: e.detail.position.latitude + 0.001,
-                longitude: e.detail.position.longitude
-            });
-            longitudeSpan.innerHTML = e.detail.position.longitude;
-            latitudeSpan.innerHTML = e.detail.position.latitude;
-            document.querySelector("a-scene").appendChild(entity);
-        }
-        testEntityAdded = true;
-    });
-
+    // window.onload = () => {
+    //     let testEntityAdded = false;
+    //
+    //     const el = document.querySelector("[gps-camera]");
+    //
+    //     const longitudeSpan = document.querySelector(".longitude");
+    //     const latitudeSpan = document.querySelector(".latitude");
+    //
+    //     el.addEventListener("gps-camera-update-position", e => {
+    //         if (!testEntityAdded) {
+    //             alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+    //             // Add a box to the north of the initial GPS position
+    //
+    //             const entity = document.createElement("a-box");
+    //             // entity.setAttribute("scale", {
+    //             //     x: 20,
+    //             //     y: 20,
+    //             //     z: 20
+    //             // });
+    //             // entity.setAttribute('material', { color: 'red' } );
+    //             // entity.setAttribute('gps-new-entity-place', {
+    //             //     latitude: e.detail.position.latitude + 0.001,
+    //             //     longitude: e.detail.position.longitude
+    //             // });
+    //             longitudeSpan.innerHTML = e.detail.position.longitude;
+    //             latitudeSpan.innerHTML = e.detail.position.latitude;
+    //             // document.querySelector("a-scene").appendChild(entity);
+    //         }
+    //         testEntityAdded = true;
+    //     });
+    // }
 
     function renderPlaces(places) {
         let scene = document.querySelector('a-scene');
