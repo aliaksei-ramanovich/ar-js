@@ -42,6 +42,7 @@
                 ></a-entity>
 
             <a-camera gps-camera rotation-reader></a-camera>
+
         </a-scene>
     </body>
 </html>
@@ -52,6 +53,7 @@
     console.log('----------kek1')
 
     window.onload = () => {
+        const el = document.querySelector("[gps-camera]");
         const longitudeSpan = document.querySelector(".longitude");
         const latitudeSpan = document.querySelector(".latitude");
 
