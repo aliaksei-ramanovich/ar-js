@@ -3,10 +3,13 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
+
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
+        <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
+
         <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
@@ -28,15 +31,12 @@
 
             <a-camera gps-new-camera='gpsMinDistance: 1' rotation-reader maxDistance="1" minDistance="1"></a-camera>
 
-            <a-entity material='color: red' geometry='primitive: box' position="0 2 0" scale="10 10 10" gps-new-entity-place="latitude: 53.955150656647476; longitude: 27.664601569960393;" animation-mixer/>
 
-            <a-entity material='color: red' geometry='primitive: box' position="0 2 0" scale="10 10 10" gps-new-entity-place="latitude:  53.955154521907296; longitude: 27.664904654373203;" animation-mixer/>
-
-            <!--    lon 20.9882567 lat 52.1883213-->
-            <a-entity material='color: blue' geometry='primitive: box' position="0 2 0" scale="10 10 10" gps-new-entity-place="latitude: 52.1883213; longitude: 20.9882567;" animation-mixer/>
-
-            <a-entity material='color: blue' geometry='primitive: box' position="0 2 0" scale="10 10 10" gps-new-entity-place="latitude: 52.18847328948933; longitude: 20.98821302586195;" animation-mixer/>
+            <a-entity gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="0.15 0.15 0.15" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>
         </a-scene>
+
+
+
 
     </body>
 </html>
@@ -61,7 +61,6 @@
         console.log('text', text)
         console.log('text2', text2)
 
-        text.innerHTML = 'work'
 
         el.addEventListener("gps-camera-update-position", e => {
 
