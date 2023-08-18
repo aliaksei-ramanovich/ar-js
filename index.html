@@ -118,7 +118,7 @@
 
 
                 let model = document.createElement('a-entity');
-                model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.004}; longitude: ${e.detail.position.longitude + 0.004};`);
+                model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.001}; longitude: ${e.detail.position.longitude + 0.001};`);
                 model.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
                 model.setAttribute('rotation', '0 180 0');
                 model.setAttribute('animation-mixer', '');
