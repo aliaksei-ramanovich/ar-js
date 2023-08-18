@@ -118,7 +118,7 @@
 
 
                 let model = document.createElement('a-entity');
-                model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.001}; longitude: ${e.detail.position.longitude + 0.001};`);
+                model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.002}; longitude: ${e.detail.position.longitude + 0.001};`);
                 // model.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
 
                 model.setAttribute('gltf-model', './assets/tech_hub_black_animation.glb');
@@ -168,7 +168,7 @@
 
 <style>
 .info {
-    /*display: none;*/
+    display: none;
 
     position: absolute;
     top: 0;
