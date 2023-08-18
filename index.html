@@ -32,7 +32,7 @@
             <a-camera gps-new-camera='gpsMinDistance: 1' rotation-reader maxDistance="1" minDistance="1"></a-camera>
 
 
-            <a-entity gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="0.15 0.15 0.15" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>
+            <a-entity gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="20 20 20" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>
         </a-scene>
 
 
@@ -114,6 +114,9 @@
                     latitude: e.detail.position.latitude + 0.005,
                     longitude: e.detail.position.longitude
                 });
+
+
+                entity2.setAttribute('animation-mixer', true)
                 entity2.setAttribute('position', '0 2 0');
 
 
