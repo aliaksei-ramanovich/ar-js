@@ -17,7 +17,7 @@
         <div class="info">
 
             <p>
-                latitude 4 -<span class="latitude"></span>
+                latitude 1 -<span class="latitude"></span>
             </p>
             <p>
                 longitude -<span class="longitude"> </span>
@@ -32,7 +32,7 @@
             <a-camera gps-new-camera='gpsMinDistance: 1' rotation-reader maxDistance="1" minDistance="1"></a-camera>
 
 
-            <a-entity gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="20 20 20" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>
+<!--            <a-entity gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="20 20 20" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>-->
         </a-scene>
 
 
@@ -95,33 +95,52 @@
                 text2.innerHTML = `${e.detail.position.longitude + 0.001}`
 
 
-                const entity2 = document.createElement("a-entity");
-                entity2.setAttribute('gltf-model', './assets/asset.gltf');
-
-                // gltf-model="./assets/asset.gltf"
-                entity.setAttribute("scale", {
-                    x: 20,
-                    y: 20,
-                    z: 20
-                });
-
-                entity2.setAttribute('rotation', '0 180 0');
-
-                // rotation="0 180 0" position="0 2 0" scale="0.15 0.15 0.15"
 
 
-                entity2.setAttribute('gps-new-entity-place', {
-                    latitude: e.detail.position.latitude + 0.005,
-                    longitude: e.detail.position.longitude
+
+
+                let model = document.createElement('a-entity');
+                model.setAttribute('gps-entity-place', `latitude: ${e.detail.position.latitude + 0.004}; longitude: ${e.detail.position.longitude + 0.004};`);
+                model.setAttribute('gltf-model', './assets/asset.gltf');
+                model.setAttribute('rotation', '0 180 0');
+                model.setAttribute('animation-mixer', '');
+                model.setAttribute('scale', '15 15 15');
+
+                model.addEventListener('loaded', () => {
+                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
                 });
 
 
-                entity2.setAttribute('animation-mixer', true)
-                entity2.setAttribute('position', '0 2 0');
 
+                document.querySelector("a-scene").appendChild(model);
 
-
-                document.querySelector("a-scene").appendChild(entity2);
+                // const entity2 = document.createElement("a-entity");
+                // entity2.setAttribute('gltf-model', './assets/asset.gltf');
+                //
+                // // gltf-model="./assets/asset.gltf"
+                // entity.setAttribute("scale", {
+                //     x: 20,
+                //     y: 20,
+                //     z: 20
+                // });
+                //
+                // entity2.setAttribute('rotation', '0 180 0');
+                //
+                // // rotation="0 180 0" position="0 2 0" scale="0.15 0.15 0.15"
+                //
+                //
+                // entity2.setAttribute('gps-new-entity-place', {
+                //     latitude: e.detail.position.latitude + 0.005,
+                //     longitude: e.detail.position.longitude
+                // });
+                //
+                //
+                // entity2.setAttribute('animation-mixer', true)
+                // entity2.setAttribute('position', '0 2 0');
+                //
+                //
+                //
+                // document.querySelector("a-scene").appendChild(entity2);
 
             }
             testEntityAdded = true;
