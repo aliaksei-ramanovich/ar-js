@@ -17,7 +17,7 @@
         <div class="info">
 
             <p>
-                latitude 2 -<span class="latitude"></span>
+                latitude 3 -<span class="latitude"></span>
             </p>
             <p>
                 longitude -<span class="longitude"> </span>
@@ -35,15 +35,20 @@
             <a-camera gps-new-camera rotation-reader></a-camera>
 
 
-            <a-entity look-at="[gps-new-camera]"  gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="15 15 15" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>
+<!--            <a-entity look-at="[gps-new-camera]"  gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="15 15 15" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>-->
+
+<!--            -->
+
+            <a-entity look-at="[gps-new-camera]"  gltf-model="./assets/lever/earth_export.gltf" rotation="0 180 0" position="0 2 0" scale="15 15 15" gps-new-entity-place="longitude: 27.678638514826325; latitude: 53.95402532864317;" animation-mixer/>
 
 
-            <a-text
-                    value="This content will always face you."
-                    look-at="[gps-new-camera]"
-                    scale="50 50 50"
-                    gps-entity-place="longitude: 27.678638514826325; latitude: 53.95402532864317;"
-            ></a-text>
+
+<!--            <a-text-->
+<!--                    value="This content will always face you."-->
+<!--                    look-at="[gps-new-camera]"-->
+<!--                    scale="50 50 50"-->
+<!--                    gps-new-entity-place="longitude: 27.678638514826325; latitude: 53.95402532864317;"-->
+<!--            ></a-text>-->
         </a-scene>
 
 
