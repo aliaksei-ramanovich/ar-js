@@ -181,7 +181,7 @@
 
 
                 let model4 = document.createElement('a-entity');
-                model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.002}; longitude: ${e.detail.position.longitude + 0.002};`);
+                model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.004}; longitude: ${e.detail.position.longitude + 0.004};`);
                 model3.setAttribute('gltf-model', './assets/earth_export.glb');
 
 
@@ -198,6 +198,28 @@
 
 
                 document.querySelector("a-scene").appendChild(model4);
+
+
+
+
+                let model5 = document.createElement('a-entity');
+                model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.006}; longitude: ${e.detail.position.longitude + 0.006};`);
+                model3.setAttribute('gltf-model', './assets/asset.gltf');
+
+
+                model5.setAttribute('rotation', '0 180 0');
+                model5.setAttribute('animation-mixer', 'loop: repeat');
+                model5.setAttribute('scale', '20 20 20');
+                model5.setAttribute('look-at', '[gps-new-camera]');
+
+
+                model5.addEventListener('loaded', () => {
+                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                });
+
+
+
+                document.querySelector("a-scene").appendChild(model5);
 
 
             }
