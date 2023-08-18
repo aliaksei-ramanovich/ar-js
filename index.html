@@ -140,7 +140,7 @@
 
 
                 let model2 = document.createElement('a-entity');
-                model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude - 0.003}; longitude: ${e.detail.position.longitude - 0.003};`);
+                model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.003}; longitude: ${e.detail.position.longitude + 0.003};`);
                 model2.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
 
 
@@ -157,6 +157,47 @@
 
 
                 document.querySelector("a-scene").appendChild(model2);
+
+
+                let model3 = document.createElement('a-entity');
+                model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude - 0.001}; longitude: ${e.detail.position.longitude - 0.001};`);
+                model3.setAttribute('gltf-model', './assets/earth_export.glb');
+
+
+                model3.setAttribute('rotation', '0 180 0');
+                model3.setAttribute('animation-mixer', 'loop: repeat');
+                model3.setAttribute('scale', '250 250 250');
+                model3.setAttribute('look-at', '[gps-new-camera]');
+
+
+                model3.addEventListener('loaded', () => {
+                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                });
+
+
+
+                document.querySelector("a-scene").appendChild(model3);
+
+
+
+                let model4 = document.createElement('a-entity');
+                model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.002}; longitude: ${e.detail.position.longitude + 0.002};`);
+                model3.setAttribute('gltf-model', './assets/earth_export.glb');
+
+
+                model4.setAttribute('rotation', '0 180 0');
+                model4.setAttribute('animation-mixer', 'loop: repeat');
+                model4.setAttribute('scale', '250 250 250');
+                model4.setAttribute('look-at', '[gps-new-camera]');
+
+
+                model4.addEventListener('loaded', () => {
+                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                });
+
+
+
+                document.querySelector("a-scene").appendChild(model4);
 
 
             }
