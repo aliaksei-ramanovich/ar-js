@@ -17,7 +17,7 @@
         <div class="info">
 
             <p>
-                latitude 1 -<span class="latitude"></span>
+                latitude 2 -<span class="latitude"></span>
             </p>
             <p>
                 longitude -<span class="longitude"> </span>
@@ -100,7 +100,7 @@
 
 
                 let model = document.createElement('a-entity');
-                model.setAttribute('gps-entity-place', `latitude: ${e.detail.position.latitude + 0.004}; longitude: ${e.detail.position.longitude + 0.004};`);
+                model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.004}; longitude: ${e.detail.position.longitude + 0.004};`);
                 model.setAttribute('gltf-model', './assets/asset.gltf');
                 model.setAttribute('rotation', '0 180 0');
                 model.setAttribute('animation-mixer', '');
