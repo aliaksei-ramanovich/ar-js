@@ -204,13 +204,13 @@
 
                 let model5 = document.createElement('a-entity');
                 model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.006}; longitude: ${e.detail.position.longitude + 0.006};`);
-                model3.setAttribute('gltf-model', './assets/asset.gltf');
+                model3.setAttribute('gltf-model', './assets/magnemite/scene.gltf');
 
 
                 model5.setAttribute('rotation', '0 180 0');
                 model5.setAttribute('animation-mixer', 'loop: repeat');
-                model5.setAttribute('scale', '20 20 20');
-                model5.setAttribute('look-at', '[gps-new-camera]');
+                model5.setAttribute('scale', '10 10 10');
+
 
 
                 model5.addEventListener('loaded', () => {
