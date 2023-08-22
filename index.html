@@ -90,7 +90,7 @@
 
                 // Add a box to the north of the initial GPS position
 
-                // if(false) {
+                if(false) {
                     const entity = document.createElement("a-box");
                     entity.setAttribute("scale", {
                         x: 20,
@@ -112,7 +112,7 @@
                     text.innerHTML = `${e.detail.position.latitude + 0.001}`
                     text2.innerHTML = `${e.detail.position.longitude + 0.001}`
 
-                // }
+                }
 
 
 
@@ -124,7 +124,7 @@
 
                 model.setAttribute('rotation', '0 180 0');
                 model.setAttribute('animation-mixer', 'loop: repeat');
-                model.setAttribute('scale', '300 300 300');
+                model.setAttribute('scale', '10 10 10');
                 model.setAttribute('look-at', '[gps-new-camera]');
                 model.addEventListener('loaded', () => {
                     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
@@ -132,6 +132,23 @@
 
                 document.querySelector("a-scene").appendChild(model);
 
+
+
+                let model2 = document.createElement('a-entity');
+                model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.003}; longitude: ${e.detail.position.longitude + 0.003};`);
+                // model.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
+
+                model2.setAttribute('gltf-model', './assets/clown-gltf/untitled.gltf');
+
+                model2.setAttribute('rotation', '0 180 0');
+                model2.setAttribute('animation-mixer', 'loop: repeat');
+                model2.setAttribute('scale', '10 10 10');
+                model2.setAttribute('look-at', '[gps-new-camera]');
+                model2.addEventListener('loaded', () => {
+                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+                });
+
+                document.querySelector("a-scene").appendChild(model2);
 
 
                 // let model = document.createElement('a-entity');
@@ -248,7 +265,7 @@
 
 <style>
 .info {
-
+    display: none;
 
     position: absolute;
     top: 0;
