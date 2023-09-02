@@ -10,50 +10,55 @@
         <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
 
         <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+
+
+
+        <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+
+        <!-- add this script in order to load a large set of 3D model extensions-->
+        <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
 
-        <div class="info">
+    <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            id="scene"
+            embedded
+            gesture-detector
+    >
+        <a-assets>
+            <a-asset-item
+                    id="animated-asset"
+                    src="assets/asset.gltf"
+            ></a-asset-item>
+        </a-assets>
 
-            <p>
-                latitude 3 -<span class="latitude"></span>
-            </p>
-            <p>
-                longitude -<span class="longitude"> </span>
-            </p>
-        </div>
+        <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="assets/marker.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+        >
+            <a-entity
+                    id="bowser-model"
+                    scale="2.435760902031721 2.435760902031721 2.435760902031721"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#animated-asset"
+                    class="clickable"
+                    gesture-handler
+            ></a-entity>
+        </a-marker>
 
-        <a-scene
-                vr-mode-ui="enabled: false"
-                embedded
-            arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
-
-
-            <a-camera gps-new-camera='gpsMinDistance: 1' rotation-reader maxDistance="1" minDistance="1"></a-camera>
-
-<!--            <a-camera gps-new-camera rotation-reader></a-camera>-->
-
-
-<!--            <a-entity look-at="[gps-new-camera]"  gltf-model="./assets/asset.gltf" rotation="0 180 0" position="0 2 0" scale="15 15 15" gps-new-entity-place="longitude: 27.6787272; latitude: 53.9541882;" animation-mixer/>-->
-
-<!--            -->
-
-<!--            <a-entity look-at="[gps-new-camera]"  gltf-model="./assets/lever/earth_export.gltf" rotation="0 180 0" position="0 2 0" scale="15 15 15" gps-new-entity-place="longitude: 27.678638514826325; latitude: 53.95402532864317;" animation-mixer/>-->
-
-
-
-<!--            <a-text-->
-<!--                    value="This content will always face you."-->
-<!--                    look-at="[gps-new-camera]"-->
-<!--                    scale="50 50 50"-->
-<!--                    gps-new-entity-place="longitude: 27.678638514826325; latitude: 53.95402532864317;"-->
-<!--            ></a-text>-->
-        </a-scene>
-
-
-
-
+        <a-entity camera></a-entity>
+    </a-scene>
     </body>
 </html>
 
@@ -62,204 +67,6 @@
 <script>
     console.log('work -------------')
 
-    window.onload = () => {
-        let testEntityAdded = false;
-
-        console.log('work onload -------------')
-
-
-        const el = document.querySelector("[gps-new-camera]");
-
-        const text = document.querySelector('.latitude')
-        const text2 = document.querySelector('.longitude')
-
-        console.log('el', el)
-        console.log('text', text)
-        console.log('text2', text2)
-
-
-        el.addEventListener("gps-camera-update-position", e => {
-
-            console.log('work listener -------------')
-
-            text2.innerHTML = 'work listener'
-
-            if (!testEntityAdded) {
-                alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
-
-
-                // Add a box to the north of the initial GPS position
-
-                if(false) {
-                    const entity = document.createElement("a-box");
-                    entity.setAttribute("scale", {
-                        x: 20,
-                        y: 20,
-                        z: 20
-                    });
-                    entity.setAttribute('material', {color: 'blue'});
-                    entity.setAttribute('gps-new-entity-place', {
-                        latitude: e.detail.position.latitude + 0.001,
-                        longitude: e.detail.position.longitude
-                    });
-                    entity.setAttribute('position', '0 2 0');
-
-
-                    console.log("latitude", e.detail.position.latitude + 0.001)
-                    console.log("longitude", e.detail.position.longitude + 0.004)
-                    document.querySelector("a-scene").appendChild(entity);
-
-                    text.innerHTML = `${e.detail.position.latitude + 0.001}`
-                    text2.innerHTML = `${e.detail.position.longitude + 0.001}`
-
-                }
-
-
-
-                let model = document.createElement('a-entity');
-                model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.001}; longitude: ${e.detail.position.longitude + 0.001};`);
-                // model.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
-
-                model.setAttribute('gltf-model', './assets/clown-glb/untitled.glb');
-
-                model.setAttribute('rotation', '0 180 0');
-                model.setAttribute('animation-mixer', 'loop: repeat');
-                model.setAttribute('scale', '50 50 50');
-                model.setAttribute('look-at', '[gps-new-camera]');
-                model.addEventListener('loaded', () => {
-                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                });
-
-                document.querySelector("a-scene").appendChild(model);
-
-
-
-                let model2 = document.createElement('a-entity');
-                model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.003}; longitude: ${e.detail.position.longitude + 0.003};`);
-                // model.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
-
-                model2.setAttribute('gltf-model', './assets/clown-gltf/untitled.gltf');
-
-                model2.setAttribute('rotation', '0 180 0');
-                model2.setAttribute('animation-mixer', 'loop: repeat');
-                model2.setAttribute('scale', '10 10 10');
-                model2.setAttribute('look-at', '[gps-new-camera]');
-                model2.addEventListener('loaded', () => {
-                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                });
-
-                document.querySelector("a-scene").appendChild(model2);
-
-
-                // let model = document.createElement('a-entity');
-                // model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.002}; longitude: ${e.detail.position.longitude + 0.001};`);
-                // // model.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
-                //
-                // model.setAttribute('gltf-model', './assets/tech_hub_black_animation.glb');
-                //
-                // model.setAttribute('rotation', '0 180 0');
-                // model.setAttribute('animation-mixer', 'loop: repeat');
-                // model.setAttribute('scale', '300 300 300');
-                // model.setAttribute('look-at', '[gps-new-camera]');
-                //
-                //
-                // model.addEventListener('loaded', () => {
-                //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                // });
-                //
-                //
-                //
-                // document.querySelector("a-scene").appendChild(model);
-                //
-                //
-                //
-                // let model2 = document.createElement('a-entity');
-                // model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.003}; longitude: ${e.detail.position.longitude + 0.003};`);
-                // model2.setAttribute('gltf-model', './assets/lever/earth_export.gltf');
-                //
-                //
-                // model2.setAttribute('rotation', '0 180 0');
-                // model2.setAttribute('animation-mixer', 'loop: repeat');
-                // model2.setAttribute('scale', '250 250 250');
-                // model2.setAttribute('look-at', '[gps-new-camera]');
-                //
-                //
-                // model2.addEventListener('loaded', () => {
-                //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                // });
-                //
-                //
-                //
-                // document.querySelector("a-scene").appendChild(model2);
-
-
-                // let model3 = document.createElement('a-entity');
-                // model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude - 0.001}; longitude: ${e.detail.position.longitude - 0.001};`);
-                // model3.setAttribute('gltf-model', './assets/earth_export.glb');
-                //
-                //
-                // model3.setAttribute('rotation', '0 180 0');
-                // model3.setAttribute('animation-mixer', 'loop: repeat');
-                // model3.setAttribute('scale', '250 250 250');
-                // model3.setAttribute('look-at', '[gps-new-camera]');
-                //
-                //
-                // model3.addEventListener('loaded', () => {
-                //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                // });
-                //
-                //
-                //
-                // document.querySelector("a-scene").appendChild(model3);
-                //
-                //
-                //
-                // let model4 = document.createElement('a-entity');
-                // model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.004}; longitude: ${e.detail.position.longitude + 0.004};`);
-                // model3.setAttribute('gltf-model', './assets/earth_export.glb');
-                //
-                //
-                // model4.setAttribute('rotation', '0 180 0');
-                // model4.setAttribute('animation-mixer', 'loop: repeat');
-                // model4.setAttribute('scale', '250 250 250');
-                // model4.setAttribute('look-at', '[gps-new-camera]');
-                //
-                //
-                // model4.addEventListener('loaded', () => {
-                //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                // });
-                //
-                //
-                //
-                // document.querySelector("a-scene").appendChild(model4);
-                //
-                //
-                //
-                //
-                // let model5 = document.createElement('a-entity');
-                // model3.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.006}; longitude: ${e.detail.position.longitude + 0.006};`);
-                // model3.setAttribute('gltf-model', './assets/magnemite/scene.gltf');
-                //
-                //
-                // model5.setAttribute('rotation', '0 180 0');
-                // model5.setAttribute('animation-mixer', 'loop: repeat');
-                // model5.setAttribute('scale', '01 10 10');
-                //
-                //
-                //
-                // model5.addEventListener('loaded', () => {
-                //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                // });
-                //
-                //
-                //
-                // document.querySelector("a-scene").appendChild(model5);
-
-
-            }
-            testEntityAdded = true;
-        });
-    }
 </script>
 
 
