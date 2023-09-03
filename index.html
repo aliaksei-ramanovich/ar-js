@@ -63,10 +63,22 @@
 
 
 
-<a-scene
-        vr-mode-ui="enabled: false"
-        embedded
-        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+
+    <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            id="scene"
+            embedded
+            gesture-detector
+    >
+
+<!--<a-scene-->
+<!--        vr-mode-ui="enabled: false"-->
+<!--        embedded-->
+<!--        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'-->
+<!--&gt;-->
 
 
     <a-camera gps-new-camera='gpsMinDistance: 1' rotation-reader maxDistance="1" minDistance="1"></a-camera>
@@ -96,7 +108,7 @@
 
 
 <script>
-    console.log('work -------------4')
+    console.log('work -------------1')
 
     window.onload = () => {
         let testEntityAdded = false;
