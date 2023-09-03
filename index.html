@@ -21,70 +21,75 @@
 
     <body style="margin: 0; overflow: hidden;">
 
+
+<!-- marker based started -->
+    <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            id="scene"
+            embedded
+            gesture-detector
+    >
+        <a-assets>
+            <a-asset-item
+                    id="animated-asset"
+                    src="assets/asset.gltf"
+            ></a-asset-item>
+        </a-assets>
+
+        <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="assets/marker1.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+        >
+            <a-entity
+                    id="bowser-model"
+                    scale="1.5 1.5 1.5"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#animated-asset"
+                    class="clickable"
+                    gesture-handler
+                    position="0 0 0"
+            ></a-entity>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+    </a-scene>
+<!-- marker based end -->
+
+<!--&lt;!&ndash;    local based started &ndash;&gt;-->
+
 <!--    <a-scene-->
-<!--            vr-mode-ui="enabled: false;"-->
-<!--            loading-screen="enabled: false;"-->
 <!--            renderer="logarithmicDepthBuffer: true;"-->
-<!--            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"-->
-<!--            id="scene"-->
 <!--            embedded-->
-<!--            gesture-detector-->
+<!--            loading-screen="enabled: false;"-->
+<!--            arjs="sourceType: webcam; debugUIEnabled: false;"-->
 <!--    >-->
 <!--        <a-assets>-->
 <!--            <a-asset-item-->
 <!--                    id="animated-asset"-->
-<!--                    src="assets/asset.gltf"-->
+<!--                    src="assets/asset2.gltf"-->
 <!--            ></a-asset-item>-->
 <!--        </a-assets>-->
 
-<!--        <a-marker-->
-<!--                id="animated-marker"-->
-<!--                type="pattern"-->
-<!--                preset="custom"-->
-<!--                url="assets/marker1.patt"-->
-<!--                raycaster="objects: .clickable"-->
-<!--                emitevents="true"-->
-<!--                cursor="fuse: false; rayOrigin: mouse;"-->
-<!--                id="markerA"-->
-<!--        >-->
-<!--            <a-entity-->
-<!--                    id="bowser-model"-->
-<!--                    scale="1.5 1.5 1.5"-->
-<!--                    animation-mixer="loop: repeat"-->
-<!--                    gltf-model="#animated-asset"-->
-<!--                    class="clickable"-->
-<!--                    gesture-handler-->
-<!--                    position="0 0 0"-->
-<!--            ></a-entity>-->
-<!--        </a-marker>-->
+<!--    &lt;!&ndash;    <a-entity&ndash;&gt;-->
+<!--    &lt;!&ndash;            look-at="[gps-camera]"&ndash;&gt;-->
+<!--    &lt;!&ndash;            animation-mixer="loop: repeat"&ndash;&gt;-->
+<!--    &lt;!&ndash;            gltf-model="#animated-asset"&ndash;&gt;-->
+<!--    &lt;!&ndash;            scale="0.41995877621236544 0.41995877621236544 0.41995877621236544"&ndash;&gt;-->
+<!--    &lt;!&ndash;            gps-entity-place="latitude: 53.95402532864317; longitude: 27.678638514826325;"&ndash;&gt;-->
+<!--    &lt;!&ndash;    ></a-entity>&ndash;&gt;-->
 
-<!--        <a-entity camera></a-entity>-->
+<!--        <a-camera gps-new-camera rotation-reader></a-camera>-->
 <!--    </a-scene>-->
-
-
-<a-scene
-        renderer="logarithmicDepthBuffer: true;"
-        embedded
-        loading-screen="enabled: false;"
-        arjs="sourceType: webcam; debugUIEnabled: false;"
->
-    <a-assets>
-        <a-asset-item
-                id="animated-asset"
-                src="assets/asset2.gltf"
-        ></a-asset-item>
-    </a-assets>
-
-<!--    <a-entity-->
-<!--            look-at="[gps-camera]"-->
-<!--            animation-mixer="loop: repeat"-->
-<!--            gltf-model="#animated-asset"-->
-<!--            scale="0.41995877621236544 0.41995877621236544 0.41995877621236544"-->
-<!--            gps-entity-place="latitude: 53.95402532864317; longitude: 27.678638514826325;"-->
-<!--    ></a-entity>-->
-
-    <a-camera gps-new-camera rotation-reader></a-camera>
-</a-scene>
+<!--&lt;!&ndash;    local based ends &ndash;&gt;-->
 
     </body>
 </html>
@@ -92,48 +97,51 @@
 
 
 <script>
-    console.log('work -------------123')
-
-    window.onload = () => {
-        let testEntityAdded = false;
-
-        console.log('work onload -------------')
+    console.log('work -------------3')
 
 
-        const el = document.querySelector("[gps-new-camera]");
+    // local based js
 
-
-        console.log('el', el)
-
-
-
-        el.addEventListener("gps-camera-update-position", e => {
-
-            console.log('work listener -------------')
-
-            if (!testEntityAdded) {
-                alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
-
-
-                let model2 = document.createElement('a-entity');
-                model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.001}; longitude: ${e.detail.position.longitude + 0.001};`);
-
-                model2.setAttribute('gltf-model', './assets/clown-gltf/untitled.gltf');
-
-                model2.setAttribute('rotation', '0 180 0');
-                model2.setAttribute('animation-mixer', 'loop: repeat');
-                model2.setAttribute('scale', '20 20 20');
-                model2.setAttribute('look-at', '[gps-new-camera]');
-                model2.addEventListener('loaded', () => {
-                    window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-                });
-
-                document.querySelector("a-scene").appendChild(model2);
-
-            }
-            testEntityAdded = true;
-        });
-    }
+    // window.onload = () => {
+    //     let testEntityAdded = false;
+    //
+    //     console.log('work onload -------------')
+    //
+    //
+    //     const el = document.querySelector("[gps-new-camera]");
+    //
+    //
+    //     console.log('el', el)
+    //
+    //
+    //
+    //     el.addEventListener("gps-camera-update-position", e => {
+    //
+    //         console.log('work listener -------------')
+    //
+    //         if (!testEntityAdded) {
+    //             alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+    //
+    //
+    //             let model2 = document.createElement('a-entity');
+    //             model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.001}; longitude: ${e.detail.position.longitude + 0.001};`);
+    //
+    //             model2.setAttribute('gltf-model', './assets/clown-gltf/untitled.gltf');
+    //
+    //             model2.setAttribute('rotation', '0 180 0');
+    //             model2.setAttribute('animation-mixer', 'loop: repeat');
+    //             model2.setAttribute('scale', '20 20 20');
+    //             model2.setAttribute('look-at', '[gps-new-camera]');
+    //             model2.addEventListener('loaded', () => {
+    //                 window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+    //             });
+    //
+    //             document.querySelector("a-scene").appendChild(model2);
+    //
+    //         }
+    //         testEntityAdded = true;
+    //     });
+    // }
 </script>
 
 
