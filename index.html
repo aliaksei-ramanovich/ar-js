@@ -87,7 +87,7 @@
     <!--            gps-entity-place="latitude: 53.95402532864317; longitude: 27.678638514826325;"-->
     <!--    ></a-entity>-->
 
-        <a-camera gps-new-camera rotation-reader></a-camera>
+        <a-camera gps-new-camera rotation-reader Look-Controls position="0 1.6 0"></a-camera>
     </a-scene>
 <!--    local based ends -->
 
@@ -132,7 +132,7 @@
                 model2.setAttribute('position', '0 0.1 0');
                 model2.setAttribute('animation-mixer', 'loop: repeat');
                 model2.setAttribute('scale', '70 70 70');
-                // model2.setAttribute('look-at', '[gps-new-camera]');
+                model2.setAttribute('look-at', '[gps-new-camera]');
 
                 model2.addEventListener('loaded', () => {
                     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
