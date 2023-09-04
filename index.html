@@ -126,12 +126,12 @@
                 let model2 = document.createElement('a-entity');
                 model2.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.001}; longitude: ${e.detail.position.longitude + 0.001};`);
 
-                model2.setAttribute('gltf-model', './assets/asset2.gltf');
+                model2.setAttribute('gltf-model', './assets/asset.gltf');
 
                 model2.setAttribute('rotation', '0 180 0');
-                model2.setAttribute('position', '0 0 0');
+                model2.setAttribute('position', '0 -2 0');
                 model2.setAttribute('animation-mixer', 'loop: repeat');
-                model2.setAttribute('scale', '35 35 35');
+                model2.setAttribute('scale', '50 50 50');
                 model2.setAttribute('look-at', '[gps-new-camera]');
 
                 model2.addEventListener('loaded', () => {
