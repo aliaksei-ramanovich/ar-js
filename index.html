@@ -19,11 +19,6 @@
     loading-screen="enabled: false;"
     arjs="sourceType: webcam; debugUIEnabled: false;"
  >
-    <a-assets>
-
-    </a-assets>
-
-
     <a-camera gps-new-camera rotation-reader Look-Controls position="0 2 0"></a-camera>
 </a-scene>
 </body>
@@ -45,7 +40,7 @@
                 model.setAttribute('rotation', '0 180 0');
                 model.setAttribute('position', '0 0.1 0');
                 model.setAttribute('animation-mixer', 'loop: repeat');
-                model.setAttribute('scale', '70 70 70');
+                model.setAttribute('scale', '80 80 80');
                 model.setAttribute('look-at', '[gps-new-camera]');
                 model.addEventListener('loaded', () => {
                     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
