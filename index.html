@@ -34,7 +34,7 @@
                 let model = document.createElement('a-entity');
                 model.setAttribute('gps-new-entity-place', `latitude: ${e.detail.position.latitude + 0.001}; longitude: ${e.detail.position.longitude + 0.001};`);
 
-                model.setAttribute('gltf-model', './assets/earth/earth_export.gltf');
+                model.setAttribute('gltf-model', './assets/glb/earth_export.glb');
                 model.setAttribute('rotation', '0 180 0');
                 model.setAttribute('position', '0 0.1 0');
                 model.setAttribute('animation-mixer', 'loop: repeat');
@@ -52,5 +52,5 @@
 
 
 <script>
-    console.log('check')
+    console.log('check 1')
 </script>
