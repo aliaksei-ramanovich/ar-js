@@ -14,17 +14,19 @@
 <a-scene embedded arjs=’sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;’>
     <a-asset-item
             id="animated-asset"
-            src="temp/gltf/earth_rotated.gltf"
+            src="assets/new/gltf/earth_rotated_twoSings.gltf"
     ></a-asset-item>
+
+
+<!--    smooth-threshold="3"-->
+<!--    smooth-tolerance="1"-->
+<!--    smooth-count="10"-->
     <a-marker-camera
             preset="custom"
             type="pattern"
             url="assets/marker/marker1.patt"
             emitevents="true"
-            smooth-threshold="3"
-            smooth-tolerance="1"
-            smooth-count="10"
-            smooth
+            smooth="true"
     >
         <a-entity
                 position="0 2 0"
